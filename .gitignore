@@ -4,3 +4,4 @@ website/
 docs-minimind/
 dataset/*.jsonl
 checkpoints
+.idea/
