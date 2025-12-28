@@ -23,7 +23,7 @@ def Logger(content):
 
 
 def get_lr(current_step, total_steps, lr):
-    return lr / 10 + 0.5 * lr * (1 + math.cos(math.pi * current_step / total_steps))
+    return lr*(0.1 + 0.45*(1 + math.cos(math.pi * current_step / total_steps)))
 
 
 def init_distributed_mode():
@@ -88,7 +88,6 @@ def lm_checkpoint(lm_config, weight='full_sft', model=None, optimizer=None, epoc
         torch.save(resume_data, resume_tmp)
         os.replace(resume_tmp, resume_path)
         del state_dict, resume_data
-        gc.collect()
         torch.cuda.empty_cache()
     else:  # 加载模式
         if os.path.exists(resume_path):
